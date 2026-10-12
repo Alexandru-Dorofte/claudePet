@@ -1,7 +1,9 @@
 {
     "scripts": {
         "build": "rollup -c",
-        "watch": "rollup -c -w --watch.onEnd=\"streamdeck restart com.alexandru.claudepet\""
+        "watch": "rollup -c -w --watch.onEnd=\"streamdeck restart com.alexandru.claudepet\"",
+        "preview": "node scripts/preview.mjs",
+        "gifs": "node scripts/gifs.mjs"
     },
     "type": "module",
     "devDependencies": {

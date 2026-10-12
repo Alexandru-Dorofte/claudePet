@@ -4,18 +4,17 @@
 	"Author": "Alexandru Dorofte",
 	"Actions": [
 		{
-			"Name": "Counter",
-			"UUID": "com.alexandru.claudepet.increment",
-			"Icon": "imgs/actions/counter/icon",
-			"Tooltip": "Displays a count, which increments by one on press.",
-			"PropertyInspectorPath": "ui/increment-counter.html",
+			"Name": "Claude Pet",
+			"UUID": "com.alexandru.claudepet.pet",
+			"Icon": "imgs/actions/pet/icon",
+			"Tooltip": "Your Claude crab. It reacts to Claude Code; press to open Claude Code.",
 			"Controllers": [
 				"Keypad"
 			],
 			"States": [
 				{
-					"Image": "imgs/actions/counter/key",
-					"TitleAlignment": "middle"
+					"Image": "imgs/actions/pet/key",
+					"ShowTitle": false
 				}
 			]
 		}
@@ -23,7 +22,7 @@
 	"Category": "claudePet",
 	"CategoryIcon": "imgs/plugin/category-icon",
 	"CodePath": "bin/plugin.js",
-	"Description": "A little Claude pet that lives on your Stream Deck.",
+	"Description": "Clawd, Claude Code's crab, living on your Stream Deck: it animates along with what Claude Code is doing. Press to open Claude Code.",
 	"Icon": "imgs/plugin/marketplace",
 	"SDKVersion": 3,
 	"Software": {
@@ -33,15 +32,10 @@
 		{
 			"Platform": "mac",
 			"MinimumVersion": "12"
-		},
-		{
-			"Platform": "windows",
-			"MinimumVersion": "10"
 		}
 	],
 	"Nodejs": {
-		"Version": "24",
-		"Debug": "enabled"
+		"Version": "24"
 	},
 	"UUID": "com.alexandru.claudepet"
 }
