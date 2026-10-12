@@ -47,17 +47,21 @@ export const searching: Variant[] = [
 			},
 		};
 	},
-	// rummaging in a box, things flying out over the shoulder
+	// rummaging in a box, tossing a Rubik's cube out over its shoulder
 	(f, pose) => {
 		pose.eyes = "down";
 		pose.legShift = f % 2;
 		const t = f % 6;
-		const item = [BLUE, YELLOW, CREAM][Math.floor(f / 6) % 3];
 		const dir = Math.floor(f / 6) % 2 ? 1 : -1;
+		const faces = ["#E5534B", YELLOW, BLUE, "#5DA34A", CREAM, "#F08A3C"];
 		return {
 			dy: t % 2,
 			props: ({ rect }) => {
-				if (t) rect(11 + dir * t * 2, [10, 6, 3, 2, 3, 5][t], 2, 2, item);
+				if (t) {
+					const x = 11 + dir * t * 2;
+					const y = [10, 6, 3, 2, 3, 5][t];
+					for (let i = 0; i < 9; i++) rect(x + (i % 3), y + Math.floor(i / 3), 1, 1, faces[(i + f) % 6]);
+				}
 				rect(6, 12, 12, 5, "#C9A06A"); // box
 				rect(6, 12, 12, 1, "#8C6A3F");
 			},

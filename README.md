@@ -165,7 +165,7 @@ Every mood and its variants, at the real key size (144×144, 5 fps). Captions co
     <td align="center" width="160"><img src="docs/animations/searching-1.gif" width="144" alt="searching 1"><br><sub>magnifying glass sweeping back and forth, eyes following it</sub></td>
     <td align="center" width="160"><img src="docs/animations/searching-2.gif" width="144" alt="searching 2"><br><sub>binoculars held up to the eyes, panning left and right</sub></td>
     <td align="center" width="160"><img src="docs/animations/searching-3.gif" width="144" alt="searching 3"><br><sub>flashlight on a raised claw, its spot sweeping the dark until it finds a bug</sub></td>
-    <td align="center" width="160"><img src="docs/animations/searching-4.gif" width="144" alt="searching 4"><br><sub>rummaging in a box, things flying out over the shoulder</sub></td>
+    <td align="center" width="160"><img src="docs/animations/searching-4.gif" width="144" alt="searching 4"><br><sub>rummaging in a box, tossing a Rubik's cube out over its shoulder</sub></td>
   </tr>
   <tr>
     <th align="left">browsing</th>
@@ -181,12 +181,11 @@ Every mood and its variants, at the real key size (144×144, 5 fps). Captions co
   </tr>
   <tr>
     <th align="left">oops</th>
-    <td align="center" width="160"><img src="docs/animations/oops-1.gif" width="144" alt="oops 1"><br><sub>a tool failed: claws up, eyes shut, sweat drop</sub></td>
-    <td align="center" width="160"><img src="docs/animations/oops-2.gif" width="144" alt="oops 2"><br><sub>dizzy: stars circling its head</sub></td>
+    <td align="center" width="160"><img src="docs/animations/oops-1.gif" width="144" alt="oops 1"><br><sub>a tool failed: a big red ✗ flashes up, the crab flinches with claws up and shakes</sub></td>
   </tr>
   <tr>
     <th align="left">compacting</th>
-    <td align="center" width="160"><img src="docs/animations/compacting-1.gif" width="144" alt="compacting 1"><br><sub>squished flat under a press</sub></td>
+    <td align="center" width="160"><img src="docs/animations/compacting-1.gif" width="144" alt="compacting 1"><br><sub>a hydraulic press comes down, squashes it flat, then lifts again</sub></td>
     <td align="center" width="160"><img src="docs/animations/compacting-2.gif" width="144" alt="compacting 2"><br><sub>squeezing an accordion shut overhead</sub></td>
   </tr>
   <tr>

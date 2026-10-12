@@ -1,41 +1,38 @@
 import { BLUE, CREAM, GREEN, GREY, INK, LILAC, NOTE, ORANGE, PINK, QUESTION, SILVER, YELLOW, type Variant } from "../art";
 
 const BANG = ["#", "#", ".", "#"];
-const DROP = [".#.", "###", "###", ".#."];
+const CROSS = ["##..##", ".####.", "..##..", ".####.", "##..##"];
+const RED = "#E5534B";
 const STAR = [".#.", "###", ".#."];
-const ORBIT = [[11, 1], [15, 1], [17, 2], [15, 3], [11, 3], [7, 3], [5, 2], [7, 1]];
 const PARTY = [PINK, YELLOW, BLUE, GREEN, LILAC];
 const CONFETTI = [1, 20, 5, 15, 9, 22, 3, 12, 18, 7, 13, 0]; // x of each falling bit
 
 export const oops: Variant[] = [
-	// a tool failed: claws up, eyes shut, sweat drop
+	// a tool failed: a big red ✗ flashes up, the crab flinches with claws up and shakes
 	(f, pose) => {
 		pose.eyes = "closed";
 		pose.arms = [true, true];
-		return { props: ({ sprite }) => sprite(19, 1 + (f % 3), DROP, "#9CC6F0") };
-	},
-	// dizzy: stars circling its head
-	(f, pose) => {
-		pose.ex = f % 2 ? 1 : -1;
-		pose.legShift = f % 2 ? 1 : 0;
-		return {
-			props: ({ sprite }) => {
-				for (let k = 0; k < 3; k++) {
-					const [x, y] = ORBIT[(f + k * 3) % 8];
-					sprite(x, y - 1, STAR, k ? CREAM : YELLOW);
-				}
-			},
-		};
+		pose.legShift = f % 2;
+		return { dy: f % 4 === 0 ? -1 : 0, props: ({ sprite }) => f % 6 < 4 && sprite(9, 0, CROSS, RED) };
 	},
 ];
 
 export const compacting: Variant[] = [
-	// squished flat under a press
+	// a hydraulic press comes down, squashes it flat, then lifts again
 	(f, pose) => {
-		const s = f % 4 < 2 ? 0 : 2;
+		const s = [0, 1, 2, 2, 1, 0][f % 6];
 		pose.squash = s;
-		pose.eyes = "closed";
-		return { props: ({ rect }) => rect(4, 4 + s, 16, 1, SILVER) };
+		pose.eyes = s ? "closed" : "open";
+		return {
+			props: ({ rect }) => {
+				rect(2, 0, 20, 1, GREY); // frame: beam, posts, base
+				rect(2, 0, 1, 17, GREY);
+				rect(21, 0, 1, 17, GREY);
+				rect(2, 16, 20, 1, GREY);
+				rect(11, 1, 2, 3 + s, SILVER); // piston
+				rect(4, 4 + s, 16, 2, SILVER); // plate, resting on the crab's head
+			},
+		};
 	},
 	// squeezing an accordion shut overhead
 	(f, pose) => {
