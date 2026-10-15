@@ -32,6 +32,21 @@
 					"ShowTitle": false
 				}
 			]
+		},
+		{
+			"Name": "Claude Activity",
+			"UUID": "com.alexandru.claudepet.activity",
+			"Icon": "imgs/actions/activity/icon",
+			"Tooltip": "The step Claude Code is on, shown the way the terminal shows it.",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/actions/activity/icon",
+					"ShowTitle": false
+				}
+			]
 		}
 	],
 	"Category": "claudePet",

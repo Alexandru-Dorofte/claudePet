@@ -4,12 +4,14 @@
 #   ~/.claudepet             the mood, one word (see the case below)
 #   ~/.claudepet-agents/<id> one file per running subagent
 #   ~/.claudepet-transcript  the session transcript's path (for Esc detection and "Baked for 1m 52s")
+#   ~/.claudepet-step        the current tool call: name, cwd, input JSON (mtime = when it started)
+#   ~/.claudepet-step-end    "done" or "failed" once that call finished (mtime = when)
 STATE="$HOME/.claudepet"
 AGENTS="$HOME/.claudepet-agents"
 
 # one jq call, one field per line (missing fields come out empty)
-{ IFS= read -r agent; IFS= read -r tool; IFS= read -r path; } <<EOF
-$(/usr/bin/jq -r '.agent_id, .tool_name, .transcript_path | . // "" | tostring | gsub("\n"; "")' 2>/dev/null)
+{ IFS= read -r agent; IFS= read -r tool; IFS= read -r path; IFS= read -r cwd; IFS= read -r input; } <<EOF
+$(/usr/bin/jq -r '.agent_id, .tool_name, .transcript_path, .cwd, .tool_input | . // "" | tostring | gsub("\n"; "")' 2>/dev/null)
 EOF
 case "$agent" in */* | .*) agent= ;; esac # it becomes a filename
 
@@ -30,8 +32,12 @@ UserPromptSubmit | Stop)
 	[ "$1" = Stop ] && s=done || s=thinking
 	[ -n "$path" ] && printf '%s\n' "$path" >"$HOME/.claudepet-transcript"
 	;;
-PostToolUse) s=thinking ;;
+PostToolUse)
+	s=thinking
+	printf 'done\n' >"$HOME/.claudepet-step-end"
+	;;
 PreToolUse)
+	printf '%s\n%s\n%s\n' "$tool" "$cwd" "$input" >"$HOME/.claudepet-step"
 	case "$tool" in
 	Read) s=reading ;;
 	Edit | MultiEdit | Write | NotebookEdit) s=writing ;;
@@ -41,7 +47,10 @@ PreToolUse)
 	*) s=working ;;
 	esac
 	;;
-PostToolUseFailure) s=oops ;;
+PostToolUseFailure)
+	s=oops
+	printf 'failed\n' >"$HOME/.claudepet-step-end"
+	;;
 Notification) s=attention ;;
 PreCompact) s=compacting ;;
 SessionEnd)
