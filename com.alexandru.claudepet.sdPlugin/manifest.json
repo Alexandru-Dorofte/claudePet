@@ -17,6 +17,21 @@
 					"ShowTitle": false
 				}
 			]
+		},
+		{
+			"Name": "Claude Quota",
+			"UUID": "com.alexandru.claudepet.quota",
+			"Icon": "imgs/actions/quota/icon",
+			"Tooltip": "Your Claude 5-hour and 7-day quota. Press to refresh.",
+			"Controllers": [
+				"Keypad"
+			],
+			"States": [
+				{
+					"Image": "imgs/actions/quota/icon",
+					"ShowTitle": false
+				}
+			]
 		}
 	],
 	"Category": "claudePet",

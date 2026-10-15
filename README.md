@@ -10,6 +10,8 @@
 
 He reads when Claude reads, scribbles when Claude edits, jumps up and down when Claude needs your permission, dances when a turn is done and falls asleep when you've been away. Press the key to open Claude Code.
 
+A second key, **Claude Quota**, shows how much of your 5-hour and 7-day Claude limits you've used.
+
 > The GIFs here show the art only. On the real key a status line sits under the crab, and mini crabs appear for running subagents.
 
 ## How it works
@@ -49,6 +51,18 @@ Events from inside a subagent only keep its mini crab alive; the big crab always
 - **Short press:** if no Claude Code session is running, opens a new Ghostty window in `~/Development` and runs `claude`; otherwise brings Ghostty to the front (one session is enough). macOS only, needs Ghostty.
 - **Hold for half a second:** shows a usage card for 6 seconds: session length, prompts typed, tokens this session (incl. subagents) and tokens today. Tokens = input + cache writes + output, counted once per message; cache reads are left out. No cost is shown because Claude Code only records cost when a session exits. Press again to close the card.
 
+## Claude Quota
+
+<p align="center">
+  <img src="docs/quota.png" width="144" alt="Claude Quota key: 5h 5%, resets in 4h 23m; 7d 58%, resets in 20h">
+</p>
+
+The same two numbers Claude Code's `/usage` shows: `5h` and `7d`, each as a big percentage over an orange bar, with a `resets` countdown under it (`35m`, `4h 23m`, `20h`, `2d 4h`).
+
+- **Data:** `GET https://api.anthropic.com/api/oauth/usage` with Claude Code's own OAuth token, read with `/usr/bin/security find-generic-password -s "Claude Code-credentials" -w`. The keychain item already trusts `security`, so there's no prompt. Nothing else to set up; you just need to be logged in to Claude Code.
+- **Refresh:** the countdown ticks every minute; the numbers are refetched every 5 minutes, or right after a window resets, while the key is on the deck (no calls when it isn't). Press the key to refresh now.
+- **Before the first load** both rows show `–`. **If a refresh fails** (e.g. a 401 because the token expired and Claude Code hasn't refreshed it yet) the key keeps the last numbers and the plugin logs a warning.
+
 ## Setup
 
 You need:
@@ -68,7 +82,7 @@ streamdeck link com.alexandru.claudepet.sdPlugin
 streamdeck dev        # developer mode; without it `streamdeck restart` does nothing
 ```
 
-Then quit and reopen the Stream Deck app once, and drag **claudePet → Claude Pet** onto a key.
+Then quit and reopen the Stream Deck app once, and drag **claudePet → Claude Pet** onto a key (and **Claude Quota** onto another, if you want it).
 
 ### 2. Add the hooks
 
@@ -215,6 +229,7 @@ npm run gifs               # regenerate docs/animations/*.gif
 | `src/scenes/*.ts` | the animation variants, one array per mood; `index.ts` lists them all |
 | `src/crab.ts` | composes one frame as SVG: crab, scene props, blink, mini crabs, status line |
 | `src/actions/pet.ts` | the Stream Deck action: polling, mood logic, "Baked for", Esc detection, key press |
+| `src/actions/quota.ts` | the Claude Quota action: token from the keychain, the usage call, `drawQuota` |
 | `hooks/claudepet.sh` | the Claude Code hook that writes the state files |
 | `scripts/` | `preview.mjs` and `gifs.mjs`, which bundle the TypeScript in memory to render frames |
 
@@ -243,6 +258,7 @@ Put a one-line comment above it; that's what the gallery caption uses. Then run 
 - **The plugin doesn't appear after `streamdeck link`:** quit and restart the Stream Deck app.
 - **`streamdeck restart` (and `npm run watch`) silently does nothing:** turn on developer mode with `streamdeck dev`.
 - **Don't relaunch Stream Deck from inside a Claude Code shell.** It would inherit the `CLAUDE_CODE_*` environment variables. The plugin strips `CLAUDE*` variables from the sessions it opens anyway, but start Stream Deck from the Dock or Finder.
+- **Claude Quota stays on `–` or old numbers:** the token has probably expired. Run Claude Code once so it refreshes it, then press the key.
 - **Don't add `"Debug": "disabled"` to the manifest's `Nodejs` block:** it makes the plugin crash-loop. Leave the key out.
 
 ## Credits
