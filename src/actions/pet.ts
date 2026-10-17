@@ -5,7 +5,7 @@ import { homedir } from "node:os";
 import { join } from "node:path";
 
 import { draw } from "../crab";
-import { SCENES, type Mood } from "../scenes";
+import { LIFE, SCENES, type Mood } from "../scenes";
 import { drawUsage, usage } from "../usage";
 
 const HOME = homedir();
@@ -17,6 +17,8 @@ const TRANSCRIPT_FILE = join(HOME, ".claudepet-transcript");
 const FRAME_MS = 200;
 // ponytail: a tool running longer than this also looks idle; refresh the file from the hook if that bites
 const SLEEP_AFTER_MS = 5 * 60_000;
+const ACTIVITY_MS = 45_000; // while living, a new activity this often
+const BEDTIME = [0, 7]; // local hours: asleep from midnight to 7am, living the rest of the day
 // ponytail: a subagent silent this long is assumed dead (crashed session never sent SubagentStop)
 const AGENT_STALE_MS = 10 * 60_000;
 const DANCE_MS = 8_000;
@@ -49,10 +51,24 @@ const VERB: Partial<Record<Mood, string>> = {
 function moodFor(state: string, age: number): Mood {
 	if (state === "attention") return "attention"; // keep asking until answered, however long that takes
 	if (state === "done" && age < DANCE_MS) return "dancing";
-	if (age > SLEEP_AFTER_MS) return "sleeping";
+	if (age > SLEEP_AFTER_MS || state === "sleeping") return offDuty();
 	if (state === "done") return "listening";
 	if (state === "oops") return age < OOPS_MS ? "oops" : "thinking"; // Claude carries on after a failed tool
 	return Object.hasOwn(SCENES, state) ? (state as Mood) : "listening";
+}
+
+/** An activity for this time of day (as an index into SCENES.living), different from `current` when possible. */
+function activity(current: number): number {
+	const h = new Date().getHours();
+	const pool = h < 18 ? LIFE.day : LIFE.evening;
+	const options = pool.map((v) => SCENES.living.indexOf(v)).filter((i) => i !== current % SCENES.living.length);
+	return options.length ? options[Math.floor(Math.random() * options.length)] : current;
+}
+
+/** Claude Code isn't running (or long idle): asleep at night, off doing his own thing by day. */
+function offDuty(): Mood {
+	const h = new Date().getHours();
+	return h >= BEDTIME[0] && h < BEDTIME[1] ? "sleeping" : "living";
 }
 
 /** Reads the last `bytes` of a file (whole lines may be cut at the start). */
@@ -250,8 +266,10 @@ export class Pet extends SingletonAction {
 
 		if (mood !== this.mood) {
 			this.mood = mood;
-			this.variant = Math.floor(Math.random() * SCENES[mood].length); // a fresh animation each time
+			this.variant = mood === "living" ? activity(-1) : Math.floor(Math.random() * SCENES[mood].length); // a fresh animation each time
 			this.baked = "";
+		} else if (mood === "living" && this.frame % (ACTIVITY_MS / FRAME_MS) === 0) {
+			this.variant = activity(this.variant); // a different activity, never the same twice in a row
 		}
 		if (mood === "dancing" && !this.baked) this.baked = this.transcript.bakedSince(this.state.since); // until Claude Code writes it
 		if (this.frame % 5 === 0) this.agents = runningAgents();

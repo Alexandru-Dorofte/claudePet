@@ -27,7 +27,7 @@ export function draw(mood: Mood, variant: number, f: number, agents = 0, text = 
 	const pose = rest();
 	const scene = variants[variant % variants.length](f, pose);
 	if (f % 18 === 0 || f % 47 === 2) pose.eyes = "closed"; // a natural blink every few seconds, sometimes a double
-	crab(d, 4, 6 + (scene.dy ?? 0), pose);
+	crab(d, 4 + (scene.dx ?? 0), 6 + (scene.dy ?? 0), pose);
 	scene.props?.(d);
 	d.end();
 

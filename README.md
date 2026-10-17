@@ -8,7 +8,7 @@
   <img src="docs/animations/dancing-2.gif" width="144" alt="Clawd celebrating">
 </p>
 
-He reads when Claude reads, scribbles when Claude edits, jumps up and down when Claude needs your permission, dances when a turn is done and falls asleep when you've been away. Press the key to open Claude Code.
+He reads when Claude reads, scribbles when Claude edits, jumps up and down when Claude needs your permission, dances when a turn is done and, when you've been away, goes off fishing, painting or gaming, or sleeps if it's past midnight. Press the key to open Claude Code.
 
 A second key, **Claude Quota**, shows how much of your 5-hour and 7-day Claude limits you've used.
 
@@ -42,7 +42,9 @@ A second key, **Claude Quota**, shows how much of your 5-hour and 7-day Claude l
 | compacting the conversation | compacting | ✻ Compacting... |
 | turn done | dancing for 8 s | Baked for 1m 52s |
 | session started, turn over, or Esc pressed | idle | Waiting... |
-| nothing happened for 5 minutes, or the session ended | sleeping | (nothing) |
+| nothing happened for 5 minutes, or the session ended | living (7:00–24:00), sleeping (0:00–7:00) | (nothing) |
+
+While living, Clawd does his own thing: a new activity every 45 s, picked from the ones that suit the time of day (outdoors and home life by day, camping and evenings in after 18:00), never the same one twice in a row. From midnight to 7am he sleeps.
 
 Events from inside a subagent only keep its mini crab alive; the big crab always follows the main conversation.
 
@@ -142,6 +144,46 @@ Every mood and its variants, at the real key size (144×144, 5 fps). Captions co
     <td align="center" width="160"><img src="docs/animations/sleeping-3.gif" width="144" alt="sleeping 3"><br><sub>a snore bubble inflates beside it, then pops</sub></td>
   </tr>
   <tr>
+    <th align="left">living (day)</th>
+    <td align="center" width="160"><img src="docs/animations/living-1.gif" width="144" alt="living 1"><br><sub>strolling across the meadow, stopping to wave at the flowers at each end</sub></td>
+    <td align="center" width="160"><img src="docs/animations/living-2.gif" width="144" alt="living 2"><br><sub>watering a potted plant in the sun until it sprouts, buds and blooms</sub></td>
+    <td align="center" width="160"><img src="docs/animations/living-3.gif" width="144" alt="living 3"><br><sub>flying a kite on a breezy day, a gust tugs it and he digs in</sub></td>
+    <td align="center" width="160"><img src="docs/animations/living-4.gif" width="144" alt="living 4"><br><sub>fishing off the bank: the float bobs, dips on a bite, and a fish gets yanked out wriggling on the line</sub></td>
+  </tr>
+  <tr>
+    <th align="left"></th>
+    <td align="center" width="160"><img src="docs/animations/living-5.gif" width="144" alt="living 5"><br><sub>sunbathing under a beach umbrella in shades, tapping a claw and sipping lemonade through a straw</sub></td>
+    <td align="center" width="160"><img src="docs/animations/living-6.gif" width="144" alt="living 6"><br><sub>building a sandcastle wall by wall, raising a flag, then a wave washes it away and he starts over</sub></td>
+    <td align="center" width="160"><img src="docs/animations/living-7.gif" width="144" alt="living 7"><br><sub>golf: address the teed-up ball, waggle, swing back over his head and through, and the ball pitches onto the far green, spins back and drops in the hole</sub></td>
+    <td align="center" width="160"><img src="docs/animations/living-8.gif" width="144" alt="living 8"><br><sub>badminton: the shuttlecock floats over the net, he winds up and smashes it back just as it arrives</sub></td>
+  </tr>
+  <tr>
+    <th align="left"></th>
+    <td align="center" width="160"><img src="docs/animations/living-9.gif" width="144" alt="living 9"><br><sub>frying an egg on a camping stove: it sizzles, he tosses the pan, the egg flips through the air and lands back sunny side up, happy wiggle</sub></td>
+    <td align="center" width="160"><img src="docs/animations/living-10.gif" width="144" alt="living 10"><br><sub>overhead press: barbell from the waist up to the chest, pressed over the head, back down; five reps light five dots, a proud flex, then crouching to pick it up again</sub></td>
+    <td align="center" width="160"><img src="docs/animations/living-11.gif" width="144" alt="living 11"><br><sub>holding a cup of tea in the right claw, steam curling up, raising it to the mouth for a sip, then a contented sigh with a little heart</sub></td>
+    <td align="center" width="160"><img src="docs/animations/living-12.gif" width="144" alt="living 12"><br><sub>painting a sunset on an easel stroke by stroke, brush in claw, then stepping back to admire it</sub></td>
+  </tr>
+  <tr>
+    <th align="left"></th>
+    <td align="center" width="160"><img src="docs/animations/living-13.gif" width="144" alt="living 13"><br><sub>a little cat strolls in and sits by him, gets patted on the head (purring, a heart pops up), then wanders off</sub></td>
+    <td align="center" width="160"><img src="docs/animations/living-14.gif" width="144" alt="living 14"><br><sub>playing the saxophone, swaying to the tune: mouthpiece in the mouth, right claw on the keys, notes puffing out of the bell</sub></td>
+    <td align="center" width="160"><img src="docs/animations/living-15.gif" width="144" alt="living 15"><br><sub>playing a retro handheld game, hopping over obstacles, then a victory jump when it wins</sub></td>
+  </tr>
+  <tr>
+    <th align="left">living (evening)</th>
+    <td align="center" width="160"><img src="docs/animations/living-16.gif" width="144" alt="living 16"><br><sub>camping under the moon by his tent, toasting a marshmallow over the fire until it catches and he blows it out</sub></td>
+    <td align="center" width="160"><img src="docs/animations/living-4.gif" width="144" alt="living 4"><br><sub>fishing off the bank: the float bobs, dips on a bite, and a fish gets yanked out wriggling on the line</sub></td>
+    <td align="center" width="160"><img src="docs/animations/living-1.gif" width="144" alt="living 1"><br><sub>strolling across the meadow, stopping to wave at the flowers at each end</sub></td>
+    <td align="center" width="160"><img src="docs/animations/living-17.gif" width="144" alt="living 17"><br><sub>reading a book in a rocking chair, rocking gently back and forth, a page turning now and then</sub></td>
+  </tr>
+  <tr>
+    <th align="left"></th>
+    <td align="center" width="160"><img src="docs/animations/living-18.gif" width="144" alt="living 18"><br><sub>gaming on the floor in front of a little TV: mashing the controller as the hero jumps, then a trophy and a victory jump</sub></td>
+    <td align="center" width="160"><img src="docs/animations/living-11.gif" width="144" alt="living 11"><br><sub>holding a cup of tea in the right claw, steam curling up, raising it to the mouth for a sip, then a contented sigh with a little heart</sub></td>
+    <td align="center" width="160"><img src="docs/animations/living-15.gif" width="144" alt="living 15"><br><sub>playing a retro handheld game, hopping over obstacles, then a victory jump when it wins</sub></td>
+  </tr>
+  <tr>
     <th align="left">listening</th>
     <td align="center" width="160"><img src="docs/animations/listening-1.gif" width="144" alt="listening 1"><br><sub>looking around, a little hop and a wave now and then</sub></td>
     <td align="center" width="160"><img src="docs/animations/listening-2.gif" width="144" alt="listening 2"><br><sub>a big stretch: claws up, eyes shut, rises on tiptoe, then a blink and back to waiting</sub></td>
@@ -235,7 +277,7 @@ npm run gifs               # regenerate docs/animations/*.gif
 
 ### Adding a variant
 
-Append a function to a mood's array in `src/scenes/`. It gets the frame number `f` and a `pose` to tweak, and returns an optional bounce `dy` and a `props` function that draws on top of the crab:
+Append a function to a mood's array in `src/scenes/`. It gets the frame number `f` and a `pose` to tweak, and returns an optional bounce `dy`, an optional sideways shift `dx` and a `props` function that draws on top of the crab:
 
 ```ts
 // waving hello, a little star blinking above

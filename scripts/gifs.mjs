@@ -50,7 +50,7 @@ function frame(mood, v, f, colours) {
 	const pose = rest();
 	const scene = SCENES[mood][v](f, pose);
 	if (f % 18 === 0 || f % 47 === 2) pose.eyes = "closed"; // the blink from crab.ts
-	crab(d, 4, 6 + (scene.dy ?? 0), pose);
+	crab(d, 4 + (scene.dx ?? 0), 6 + (scene.dy ?? 0), pose);
 	scene.props?.(d);
 	if (mood === "delegating") {
 		// two busy subagent minis, laid out like crab.ts does

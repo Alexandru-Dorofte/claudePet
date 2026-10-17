@@ -39,8 +39,8 @@ export type Pose = {
 	squash: number; // flattens the body from the top, 0..2
 };
 
-/** A scene variant: pose the crab, optionally bounce it, and draw props on top of it. */
-export type Scene = { dy?: number; props?: (d: Draw) => void };
+/** A scene variant: pose the crab, optionally move it (dx -4..4 keeps it on the key, dy bounces), and draw props on top of it. */
+export type Scene = { dx?: number; dy?: number; props?: (d: Draw) => void };
 export type Variant = (f: number, pose: Pose) => Scene;
 
 export const rest = (): Pose => ({ eyes: "open", ex: 0, arms: [false, false], legShift: 0, squash: 0 });
